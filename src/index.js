@@ -4,8 +4,9 @@ import { Map } from 'immutable';
 import AddNote from './components/note_add';
 import Note from './components/note';
 import './style.scss';
+import * as db from './services/datastore';
 
-let noteId = 0;
+// const noteId = 0;
 class App extends Component {
   constructor(props) {
     super(props);
@@ -16,8 +17,15 @@ class App extends Component {
     };
   }
 
+  componentDidMount() {
+    db.fetchNotes((notes) => {
+      // eslint-disable-next-line new-cap
+      this.setState({ notes: Map(notes) });
+    });
+  }
+
   addNote = (noteTitle) => {
-    noteId += 1;
+    // noteId += 1;
 
     // need to disable prefer-const because value will eventually be reassigned
     // eslint-disable-next-line prefer-const
@@ -28,26 +36,21 @@ class App extends Component {
       y: 10,
     };
 
-    this.setState(prevState => ({
-      notes: prevState.notes.set(noteId, noteStarter),
-    }));
+    db.addNote(noteStarter);
   }
 
   updateNote = (id, fields) => {
-    this.setState(prevState => ({
-      notes: prevState.notes.update(id, (n) => { return Object.assign({}, n, fields); }),
-    }));
+    db.updateNote(id, fields);
   }
 
   deleteNote = (id) => {
-    this.setState(prevState => ({
-      notes: prevState.notes.delete(id),
-    }));
+    db.deleteNote(id);
   }
 
   // eslint-disable-next-line class-methods-use-this
   renderHeader() {
     return (
+      // eslint-disable-next-line react/no-unescaped-entities
       <h1>Billy's Notes App</h1>
     );
   }
@@ -59,7 +62,7 @@ class App extends Component {
         <AddNote onSubmit={this.addNote} />
         {this.state.notes.entrySeq().map(([id, note]) => {
           return (
-            <Note id={id} note={note} onDelete={this.deleteNote} onUpdate={this.updateNote} />
+            <Note id={id} key={id} note={note} onDelete={this.deleteNote} onUpdate={this.updateNote} />
           );
         })}
       </div>

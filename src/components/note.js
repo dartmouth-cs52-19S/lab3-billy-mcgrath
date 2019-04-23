@@ -22,6 +22,7 @@ class Note extends Component {
     this.onDrag = this.onDrag.bind(this);
   }
 
+  // Delete method copied from Avery Vanacore
   onDeleteClick = (event) => {
     this.props.onDelete(this.props.id);
   }

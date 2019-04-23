@@ -15,8 +15,6 @@ class AddNote extends Component {
 
   onCreateNote() {
     // The onSubmit line was copied from Avery Vanacore
-    /* This was the only area where she showed me actual code, but it helped me understand
-    all the other instances where I needed to use props, so do with that what you will */
     this.props.onSubmit(this.state.title);
     this.setState({ title: '' });
   }
