@@ -1,8 +1,8 @@
 {
-  "name": "starterpack-billy-mcgrath",
+  "name": "lab3-billy-mcgrath",
   "version": "1.0.0",
   "main": "src/index.js",
-  "repository": "git@github.com:dartmouth-cs52-19S/starterpack-billy-mcgrath.git",
+  "repository": "git@github.com:dartmouth-cs52-19S/lab3-billy-mcgrath.git",
   "author": "billy-mcgrath <william.f.mcgrath.20@dartmouth.edu>",
   "license": "MIT",
   "scripts": {
